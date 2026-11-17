@@ -1,0 +1,20 @@
+const {JSDOM}=require('jsdom'),fs=require('fs');
+const html=fs.readFileSync('index.html','utf8').replace(/<script src[^>]*><\/script>/g,'');
+const d=new JSDOM(html,{runScripts:'outside-only',url:'http://localhost'});const w=d.window;
+w.eval(fs.readFileSync('operations.js','utf8').replace('if(typeof module','if(false&&typeof module')+'\n'+fs.readFileSync('script.js','utf8')+'\nwindow.__s={get pipe(){return pipe}}');
+const $=s=>w.document.querySelector(s);let ok=0,bad=0;const T=(n,c)=>{c?ok++:(bad++,console.log('FAIL',n))};
+function add(id,set={}){w.eval(`pick('${id}')`);for(const[k,v]of Object.entries(set)){const e=$(`[data-k="${k}"]`);e.value=v}$('#add').click()}
+add('resize',{w:500,h:500});add('grayscale');add('gamma',{g:0.5});add('rotate',{angle:90});add('histogram');
+T('5 ops',w.eval('pipe.length')==5);
+w.eval('move(4,0)');T('reorder',w.eval('pipe[0].id')=='histogram');
+$('#pipe li:nth-child(2) [data-a=dup]').click();T('dup',w.eval('pipe.length')==6);
+$('#pipe li:nth-child(3) [data-a=del]').click();T('del mid',w.eval('pipe.length')==5);
+$('#pipe li:nth-child(2) [data-a=edit]').click();$('[data-k=w]').value=800;$('#add').click();T('edit',w.eval('pipe[1].v.w')==800||w.eval('pipe.some(x=>x.v.w==800)'));
+$('#gen').click();T('gen',w.eval('window.lastCode').includes('cv2.imread'));
+w.eval('pipe=[]');add('gaussian',{k:4});T('odd rejected',w.eval('pipe.length')==0&&$('#err').textContent.includes('فردي'));
+$('#nl').value='حول الصورة إلى Grayscale ثم صغّرها بنسبة 50% ثم دوّرها 90 درجة';$('#parse').click();$('#addnl').click();
+T('nl ar',JSON.stringify(w.eval('pipe.map(x=>x.id)'))=='["grayscale","resize","rotate"]'&&w.eval('pipe[1].v.pct')==50&&w.eval('pipe[2].v.angle')==90);
+const r=w.eval(`parseNL('blah blah xyz')`);T('unknown',r.found.length==0&&r.unknown.length==1);
+const r2=w.eval(`parseNL('convert to grayscale then gamma 0.5, apply flip')`);T('en+out',r2.found.length==2&&r2.notes.length==1);
+w.eval('pipe=[]');$('#clear').click();T('clear',w.eval('pipe.length')==0);
+console.log('ok',ok,'bad',bad);

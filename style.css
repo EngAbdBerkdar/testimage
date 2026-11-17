@@ -1,0 +1,14 @@
+:root{--bg:#0f1420;--c:#171e2e;--b:#2a3550;--t:#e6ebf5;--a:#4fd1c5;--m:#8b97b3}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--t);font-family:Segoe UI,Tahoma,sans-serif;line-height:1.7}
+header{padding:12px 20px;border-bottom:1px solid var(--b)}h1{margin:0;font-size:20px}.en{color:var(--a);font-size:14px}small,.muted{color:var(--m)}
+.layout{display:flex;gap:14px;padding:14px}aside{width:230px;flex:none;background:var(--c);border:1px solid var(--b);border-radius:10px;padding:10px;max-height:90vh;overflow:auto}
+aside h4{margin:8px 0 2px;color:var(--a);font-size:13px}aside button{display:block;width:100%;text-align:right;background:none;border:0;color:var(--t);padding:3px 6px;cursor:pointer;border-radius:6px}aside button:hover{background:var(--b)}
+main{flex:1;min-width:0}.card{background:var(--c);border:1px solid var(--b);border-radius:10px;padding:12px 14px;margin-bottom:12px}h2{font-size:16px;margin:0 0 8px;color:var(--a)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:end}label{display:flex;flex-direction:column;font-size:13px;color:var(--m)}
+input,select,textarea,button{background:#0c111c;color:var(--t);border:1px solid var(--b);border-radius:6px;padding:6px 8px;font:inherit}textarea{width:100%}input[type=checkbox]{width:auto}
+button{cursor:pointer}button.pri{background:var(--a);color:#06231f;border:0;font-weight:700;margin-top:8px}.err{color:#ff8080;min-height:20px}.warn{color:#f6c66a}
+ol{list-style:none;padding:0;margin:0 0 8px}li{display:flex;gap:8px;align-items:center;background:#0c111c;border:1px solid var(--b);border-radius:8px;padding:6px 8px;margin-bottom:6px}li.over{border-color:var(--a)}li .h{cursor:grab;color:var(--m)}li .s{flex:1;font-size:13px}li .s code{color:var(--m)}
+pre{background:#0a0e17;border:1px solid var(--b);border-radius:8px;padding:12px;overflow:auto;text-align:left;font:13px Consolas,monospace;white-space:pre}
+.k{color:#c792ea}.s2{color:#c3e88d}.cm{color:#6a7a9b}.nu{color:#f78c6c}.f{color:#82aaff}
+table{width:100%;border-collapse:collapse;font-size:13px}td{border:1px solid var(--b);padding:4px 8px;vertical-align:top}td:first-child{direction:ltr;text-align:left;font-family:Consolas,monospace;white-space:pre-wrap}
+@media(max-width:800px){.layout{flex-direction:column}aside{width:100%;max-height:200px}}

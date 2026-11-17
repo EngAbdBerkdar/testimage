@@ -1,0 +1,510 @@
+{
+ "source": "المحاضرات 2-6 (لا توجد محاضرة 1 في الملفات المرفوعة)",
+ "operations": {
+  "grayscale": {
+   "category": "Image Basics",
+   "name": "Grayscale",
+   "name_ar": "تحويل إلى رمادي",
+   "lecture": "م2 (cvtColor في كود الفيديو)",
+   "requires_gray": false,
+   "params": []
+  },
+  "resize": {
+   "category": "Image Transformation",
+   "name": "Resize",
+   "name_ar": "تغيير الحجم",
+   "lecture": "م3 §1.1",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "mode",
+     "label": "الطريقة",
+     "type": "s",
+     "default": "size",
+     "help": "size: أبعاد محددة (width,height) كما في resize(im,(200,100)). percent: نسبة مئوية كما في scale_percent",
+     "options": [
+      "size",
+      "percent"
+     ]
+    },
+    {
+     "key": "w",
+     "label": "Width (أعمدة)",
+     "type": "n",
+     "default": 500,
+     "help": "عدد الأعمدة الجديد؛ يغيّر عرض الصورة"
+    },
+    {
+     "key": "h",
+     "label": "Height (أسطر)",
+     "type": "n",
+     "default": 500,
+     "help": "عدد الأسطر الجديد؛ يغيّر ارتفاعها"
+    },
+    {
+     "key": "pct",
+     "label": "Scale %",
+     "type": "n",
+     "default": 50,
+     "help": "نسبة الحجم النهائي من الأصلي (50 = نصف، 220 = تكبير)"
+    }
+   ]
+  },
+  "rotate": {
+   "category": "Image Transformation",
+   "name": "Rotation",
+   "name_ar": "تدوير",
+   "lecture": "م3 §1.2",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "angle",
+     "label": "Rotation Angle",
+     "type": "n",
+     "default": 90,
+     "help": "زاوية التدوير بالدرجات"
+    },
+    {
+     "key": "dir",
+     "label": "Direction",
+     "type": "s",
+     "default": "ccw",
+     "help": "الاتجاه الموجب في المحاضرة عكس عقارب الساعة",
+     "options": [
+      "ccw",
+      "cw"
+     ]
+    },
+    {
+     "key": "scale",
+     "label": "Scale",
+     "type": "n",
+     "default": 1,
+     "help": "1.0 يحافظ على الحجم، 0.5 نصف الحجم"
+    }
+   ]
+  },
+  "crop": {
+   "category": "Image Transformation",
+   "name": "Crop",
+   "name_ar": "اقتطاع",
+   "lecture": "م3 §1.3",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "h1",
+     "label": "h1 (سطر البداية)",
+     "type": "n",
+     "default": 0,
+     "help": ""
+    },
+    {
+     "key": "h2",
+     "label": "h2 (سطر النهاية)",
+     "type": "n",
+     "default": 100,
+     "help": "غير مشمول"
+    },
+    {
+     "key": "w1",
+     "label": "w1 (عمود البداية)",
+     "type": "n",
+     "default": 0,
+     "help": ""
+    },
+    {
+     "key": "w2",
+     "label": "w2 (عمود النهاية)",
+     "type": "n",
+     "default": 100,
+     "help": "غير مشمول"
+    }
+   ]
+  },
+  "gamma": {
+   "category": "Intensity Transformation",
+   "name": "Gamma Correction",
+   "name_ar": "تصحيح غاما",
+   "lecture": "م4 §4.1",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "g",
+     "label": "Gamma Value",
+     "type": "n",
+     "default": 0.5,
+     "help": "أكبر من 1 تعتّم، أصغر من 1 تفتّح"
+    },
+    {
+     "key": "m",
+     "label": "الطريقة",
+     "type": "s",
+     "default": "sk",
+     "help": "sk: exposure.adjust_gamma (كود المحاضرة). manual: cv2.pow المعلّق في المحاضرة",
+     "options": [
+      "sk",
+      "manual"
+     ]
+    }
+   ]
+  },
+  "arith": {
+   "category": "Intensity Transformation",
+   "name": "Add / Subtract / Multiply / Divide",
+   "name_ar": "عمليات حسابية",
+   "lecture": "م3 تمرين 3",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "op",
+     "label": "العملية",
+     "type": "s",
+     "default": "add",
+     "help": "تقصّ القيم عند 0 و255",
+     "options": [
+      "add",
+      "subtract",
+      "multiply",
+      "divide"
+     ]
+    },
+    {
+     "key": "val",
+     "label": "Value",
+     "type": "n",
+     "default": 40,
+     "help": "القيمة الثابتة"
+    }
+   ]
+  },
+  "equalize": {
+   "category": "Histogram Processing",
+   "name": "Histogram Equalization",
+   "name_ar": "تسوية الهيستوغرام",
+   "lecture": "م3 §3",
+   "requires_gray": true,
+   "params": []
+  },
+  "histogram": {
+   "category": "Histogram Processing",
+   "name": "Histogram",
+   "name_ar": "الهيستوغرام",
+   "lecture": "م3 §3",
+   "requires_gray": true,
+   "params": [
+    {
+     "key": "m",
+     "label": "الطريقة",
+     "type": "s",
+     "default": "plt",
+     "help": "matplotlib: plt.hist. opencv: cv2.calcHist ثم plt.plot",
+     "options": [
+      "plt",
+      "cv"
+     ]
+    },
+    {
+     "key": "bins",
+     "label": "histSize",
+     "type": "n",
+     "default": 256,
+     "help": "عدد الأعمدة"
+    }
+   ]
+  },
+  "mean": {
+   "category": "Spatial Filtering",
+   "name": "Mean Filter",
+   "name_ar": "مرشح المتوسط",
+   "lecture": "م5 §5.4.1",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "w",
+     "label": "عرض القناع",
+     "type": "n",
+     "default": 3,
+     "help": ""
+    },
+    {
+     "key": "h",
+     "label": "ارتفاع القناع",
+     "type": "n",
+     "default": 3,
+     "help": ""
+    }
+   ]
+  },
+  "gaussian": {
+   "category": "Spatial Filtering",
+   "name": "Gaussian Filter",
+   "name_ar": "المرشح الغوصي",
+   "lecture": "م5 §5.4.2",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "k",
+     "label": "Kernel size (m)",
+     "type": "n",
+     "default": 5,
+     "help": "فردي"
+    },
+    {
+     "key": "s",
+     "label": "Sigma",
+     "type": "n",
+     "default": 0,
+     "help": "0 يعني حسابها تلقائياً"
+    }
+   ]
+  },
+  "median": {
+   "category": "Spatial Filtering",
+   "name": "Median Filter",
+   "name_ar": "المرشح الوسيط",
+   "lecture": "م5 §5.5",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "k",
+     "label": "Kernel size (m)",
+     "type": "n",
+     "default": 3,
+     "help": "فردي"
+    }
+   ]
+  },
+  "bilateral": {
+   "category": "Spatial Filtering",
+   "name": "Bilateral Filter",
+   "name_ar": "المرشح الثنائي",
+   "lecture": "م5 §5.4.3",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "d",
+     "label": "d",
+     "type": "n",
+     "default": 5,
+     "help": "حجم القناع"
+    },
+    {
+     "key": "sc",
+     "label": "sigmaColor",
+     "type": "n",
+     "default": 75,
+     "help": ""
+    },
+    {
+     "key": "ss",
+     "label": "sigmaSpace",
+     "type": "n",
+     "default": 75,
+     "help": ""
+    }
+   ]
+  },
+  "noise": {
+   "category": "Spatial Filtering",
+   "name": "Add Noise",
+   "name_ar": "إضافة ضجيج",
+   "lecture": "م5 §5.3",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "m",
+     "label": "النوع",
+     "type": "s",
+     "default": "gaussian",
+     "help": "",
+     "options": [
+      "gaussian",
+      "s&p",
+      "speckle"
+     ]
+    },
+    {
+     "key": "var",
+     "label": "var (التباين)",
+     "type": "n",
+     "default": 0.01,
+     "help": "تباين وليس انحرافاً معيارياً"
+    },
+    {
+     "key": "amount",
+     "label": "amount",
+     "type": "n",
+     "default": 0.05,
+     "help": "نسبة بكسلات s&p"
+    },
+    {
+     "key": "back",
+     "label": "تحويل إلى uint8",
+     "type": "c",
+     "default": true,
+     "help": "random_noise تعيد float في [0,1]"
+    }
+   ]
+  },
+  "threshold": {
+   "category": "Image Segmentation",
+   "name": "Threshold",
+   "name_ar": "التعتيب",
+   "lecture": "م5 §5.7 / م6",
+   "requires_gray": true,
+   "params": [
+    {
+     "key": "t",
+     "label": "thresh",
+     "type": "n",
+     "default": 127,
+     "help": "العتبة"
+    },
+    {
+     "key": "mv",
+     "label": "maxval",
+     "type": "n",
+     "default": 255,
+     "help": ""
+    }
+   ]
+  },
+  "sobel": {
+   "category": "Edge Detection",
+   "name": "Sobel",
+   "name_ar": "سوبل",
+   "lecture": "م6 §6.3",
+   "requires_gray": true,
+   "params": [
+    {
+     "key": "dir",
+     "label": "الاتجاه",
+     "type": "s",
+     "default": "x",
+     "help": "x: حواف عمودية، y: أفقية",
+     "options": [
+      "x",
+      "y"
+     ]
+    },
+    {
+     "key": "k",
+     "label": "ksize",
+     "type": "s",
+     "default": 3,
+     "help": "",
+     "options": [
+      1,
+      3,
+      5,
+      7
+     ]
+    }
+   ]
+  },
+  "laplacian": {
+   "category": "Edge Detection",
+   "name": "Laplacian",
+   "name_ar": "لابلاسيان",
+   "lecture": "م6 §6.4.1",
+   "requires_gray": true,
+   "params": []
+  },
+  "canny": {
+   "category": "Edge Detection",
+   "name": "Canny",
+   "name_ar": "كاني",
+   "lecture": "م6 §6.4.2",
+   "requires_gray": true,
+   "params": [
+    {
+     "key": "t1",
+     "label": "threshold1 (دنيا)",
+     "type": "n",
+     "default": 100,
+     "help": "تحتها تُرفض"
+    },
+    {
+     "key": "t2",
+     "label": "threshold2 (عليا)",
+     "type": "n",
+     "default": 200,
+     "help": "فوقها تُقبل"
+    }
+   ]
+  },
+  "unsharp": {
+   "category": "Edge Detection",
+   "name": "Unsharp Mask (Sharpen)",
+   "name_ar": "تعزيز الصورة",
+   "lecture": "م6 §6.7",
+   "requires_gray": true,
+   "params": [
+    {
+     "key": "r",
+     "label": "radius",
+     "type": "n",
+     "default": 5,
+     "help": "نصف قطر التنعيم"
+    },
+    {
+     "key": "a",
+     "label": "amount",
+     "type": "n",
+     "default": 2,
+     "help": "مضاعفة الفرق"
+    },
+    {
+     "key": "back",
+     "label": "تحويل إلى uint8",
+     "type": "c",
+     "default": true,
+     "help": "الدالة تعيد float"
+    }
+   ]
+  },
+  "show": {
+   "category": "Image Basics",
+   "name": "Show Image",
+   "name_ar": "عرض الصورة",
+   "lecture": "م2",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "b",
+     "label": "الطريقة",
+     "type": "s",
+     "default": "cv2",
+     "help": "",
+     "options": [
+      "cv2",
+      "plt"
+     ]
+    },
+    {
+     "key": "t",
+     "label": "عنوان النافذة",
+     "type": "t",
+     "default": "image",
+     "help": ""
+    }
+   ]
+  },
+  "save": {
+   "category": "Image Basics",
+   "name": "Save Image",
+   "name_ar": "حفظ الصورة",
+   "lecture": "م2",
+   "requires_gray": false,
+   "params": [
+    {
+     "key": "f",
+     "label": "اسم الملف",
+     "type": "t",
+     "default": "result.png",
+     "help": "الامتداد يحدد الصيغة"
+    }
+   ]
+  }
+ }
+}
